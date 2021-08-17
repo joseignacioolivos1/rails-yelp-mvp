@@ -1,9 +1,7 @@
 class Review < ApplicationRecord
-   has_many :reviews, dependent: :destroy
-   validates :content, presence: true
-   validates :restaurant, presence: true
-   validates :category,presence:true
-
-   validates :category, inclusion: { in: ( italian japanese french belgian),
-    message: "%{value} is not a valid cate" }
+    belongs_to :restaurant
+    validates :content, presence: true
+    validates :rating, presence: true
+    validates :rating, numericality: { only_integer: true }
+    validates :rating, inclusion: { in: (0..5) }
 end
